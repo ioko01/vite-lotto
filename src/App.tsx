@@ -1,6 +1,3 @@
-import React, { useEffect, useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { Home } from './components/Home'
 import { Bills } from './components/Bills'
@@ -24,23 +21,13 @@ import { Bills } from './components/Bills'
 // }
 
 function App() {
-  const [sidebarHandler, setSidebarHandler] = useState(true)
-
-  useEffect(() => {
-    if (sidebarHandler) {
-
-    }
-  }, [])
-
-
 
   return (
     <div className="w-full h-full">
-
       <div className="flex flex-no-wrap h-full">
-        <div style={{ minHeight: "716px" }} className="w-64 absolute relative bg-gray-800 shadow h-full flex-col justify-between hidden sm:flex">
-          <div className="px-8">
-            <div className="h-16 w-full flex items-center">
+        <div style={{ minHeight: "716px" }} className="w-64 absolute relative bg-gray-800 shadow h-full flex-col justify-between">
+          <div className="px-2">
+            <div className="h-16 w-full flex items-center justify-center">
               <svg aria-label="Ripples. Logo" role="img" xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
                 <path
                   fill="#5F7DF2"
@@ -49,145 +36,39 @@ function App() {
               </svg>
             </div>
             <ul className="mt-12">
-              <li className="flex w-full justify-between text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-grid" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <rect x="4" y="4" width="6" height="6" rx="1"></rect>
-                    <rect x="14" y="4" width="6" height="6" rx="1"></rect>
-                    <rect x="4" y="14" width="6" height="6" rx="1"></rect>
-                    <rect x="14" y="14" width="6" height="6" rx="1"></rect>
-                  </svg>
-                  <span className="text-sm ml-2">Dashboard</span>
-                </a>
-                <div className="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs">5</div>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path>
-                  </svg>
-                  <span className="text-sm ml-2">Products</span>
-                </a>
-                <div className="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs">8</div>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-compass" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <polyline points="8 16 10 10 16 8 14 14 8 16"></polyline>
-                    <circle cx="12" cy="12" r="9"></circle>
-                  </svg>
-                  <span className="text-sm ml-2">Performance</span>
-                </a>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white" >
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-code" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <polyline points="7 8 3 12 7 16"></polyline>
-                    <polyline points="17 8 21 12 17 16"></polyline>
-                    <line x1="14" y1="4" x2="10" y2="20"></line>
-                  </svg>
-                  <span className="text-sm ml-2">Deliverables</span>
-                </a>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-puzzle" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1"></path>
-                  </svg>
-                  <span className="text-sm ml-2">Invoices</span>
-                </a>
-                <div className="py-1 px-3 bg-gray-600 rounded text-gray-300 flex items-center justify-center text-xs">25</div>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center mb-6">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-stack" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="12 4 4 8 12 12 20 8 12 4" />
-                    <polyline points="4 12 12 16 20 12" />
-                    <polyline points="4 16 12 20 20 16" />
-                  </svg>
-                  <span className="text-sm ml-2">Inventory</span>
-                </a>
-              </li>
-              <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center">
-                <a href="javascript:void(0)" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-settings" width="18" height="18" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                    <circle cx="12" cy="12" r="3" />
-                  </svg>
-                  <span className="text-sm ml-2">Settings</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-          <div className="px-8 border-t border-gray-700">
-            <ul className="w-full flex items-center justify-between bg-gray-800">
-              <li className="cursor-pointer text-white pt-5 pb-3">
-                <button aria-label="show notifications" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-bell" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"></path>
-                    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
-                  </svg>
-                </button>
-              </li>
-              <li className="cursor-pointer text-white pt-5 pb-3">
-                <button aria-label="open chats" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-messages" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M21 14l-3 -3h-7a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1h9a1 1 0 0 1 1 1v10"></path>
-                    <path d="M14 15v2a1 1 0 0 1 -1 1h-7l-3 3v-10a1 1 0 0 1 1 -1h2"></path>
-                  </svg>
-                </button>
-              </li>
-              <li className="cursor-pointer text-white pt-5 pb-3">
-                <button aria-label="open settings" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-settings" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
-                    <circle cx="12" cy="12" r="3"></circle>
-                  </svg>
-                </button>
-              </li>
-              <li className="cursor-pointer text-white pt-5 pb-3">
-                <button aria-label="open logs" className="focus:outline-none focus:ring-2 rounded focus:ring-gray-300">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-archive" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <rect x="3" y="4" width="18" height="4" rx="2"></rect>
-                    <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10"></path>
-                    <line x1="10" y1="12" x2="14" y2="12"></line>
-                  </svg>
-                </button>
-              </li>
+              <div className='flex'>
+                <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                  <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                    </svg>
+                    <span className="text-xs ml-2">ข้อมูลส่วนตัว</span>
+                  </NavLink>
+                </li>
+                <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                  <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+                    </svg>
+
+                    <span className="text-xs ml-2">ออกจากระบบ</span>
+                  </NavLink>
+                </li>
+              </div>
             </ul>
           </div>
         </div>
 
         <div className="w-full">
-          <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+          <nav className="bg-white border-gray-200 px-2 py-2.5 rounded">
             <div className="container">
-              <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-                <ul className="flex flex-col p-4 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <div className="w-full" id="navbar-default">
+                <ul className="w-full flex flex-row p-4 mt-0 rounded-lg text-sm font-medium border-0">
                   <li>
-                    <NavLink to="/" className={({ isActive }) => "block pl-3 pr-4" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
+                    <NavLink to="/" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/bills" className={({ isActive }) => "block pl-3 pr-4" + (isActive ? " active" : "")}>หน้า 2</NavLink>
-                  </li>
-                  <li>
-                    <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</a>
-                  </li>
-                  <li>
-                    <a href="#" className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</a>
+                    <NavLink to="/bills" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้า 2</NavLink>
                   </li>
                 </ul>
               </div>

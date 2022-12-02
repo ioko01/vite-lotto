@@ -2,8 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "FC Minimal";
+  src: local("FC Minimal"),
+    url("./assets/fonts/FC_Minimal_Regular.ttf") format("truetype");
+}
+
 :root {
-  font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
+  font-family: "FC Minimal", sans-serif;
   font-size: 16px;
   height: 100%;
 }
@@ -17,6 +23,7 @@ body,
   margin: 0;
   padding: 0;
   box-shadow: none !important;
+  font-weight: bold;
 }
 
 nav a.active {
