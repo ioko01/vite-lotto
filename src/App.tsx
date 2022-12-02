@@ -59,7 +59,7 @@ function App() {
           </div>
         </div>
 
-        <div className="w-full">
+        <div style={{ minWidth: "720px" }} className="w-full">
           <nav className="bg-white border-gray-200 px-2 py-2.5 rounded">
             <div className="container">
               <div className="w-full" id="navbar-default">
@@ -74,8 +74,8 @@ function App() {
               </div>
             </div>
           </nav>
-          <div className="container mx-auto py-10 h-64 w-full px-3">
-            <div className="w-full h-full">
+          <div className="mx-auto py-10 h-64 w-full px-3">
+            <div className="w-full h-full bg-gray-50">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/bills" element={<Bills />} />
