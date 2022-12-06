@@ -1,6 +1,7 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { Home } from './components/Home'
 import { Bills } from './components/Bills'
+import { Orders } from './components/Orders'
 
 
 
@@ -25,7 +26,7 @@ function App() {
   return (
     <div className="w-full h-full">
       <div className="flex flex-no-wrap h-full">
-        <div style={{ minHeight: "716px" }} className="w-64 absolute relative bg-gray-800 shadow h-full flex-col justify-between">
+        <div style={{ minHeight: "716px", minWidth: "220px" }} className="absolute relative bg-gray-800 shadow h-full flex-col justify-between">
           <div className="px-2">
             <div className="h-16 w-full flex items-center justify-center">
               <svg aria-label="Ripples. Logo" role="img" xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
@@ -36,30 +37,54 @@ function App() {
               </svg>
             </div>
             <ul className="mt-12">
-              <div className='flex'>
-                <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center">
-                  <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
-                    </svg>
-                    <span className="text-xs ml-2">ข้อมูลส่วนตัว</span>
-                  </NavLink>
-                </li>
-                <li className="flex w-full justify-between text-gray-400 hover:text-gray-300 cursor-pointer items-center">
-                  <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
-                    </svg>
+              <div className='flex flex-col'>
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                    <span>User</span>
+                    <span>asd</span>
+                  </li>
+                </div>
 
-                    <span className="text-xs ml-2">ออกจากระบบ</span>
-                  </NavLink>
-                </li>
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                    <span>Role</span>
+                    <span>asd</span>
+                  </li>
+                </div>
+
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                    <span>Balance</span>
+                    <span>asd</span>
+                  </li>
+                </div>
+
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-evenly text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                    <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+                      </svg>
+                      <span className="text-xs ml-2">ข้อมูลส่วนตัว</span>
+                    </NavLink>
+                  </li>
+                  <li className="flex w-full justify-evenly text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                    <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
+                      </svg>
+
+                      <span className="text-xs ml-2">ออกจากระบบ</span>
+                    </NavLink>
+                  </li>
+                </div>
+
               </div>
             </ul>
           </div>
         </div>
 
-        <div style={{ minWidth: "720px" }} className="w-full">
+        <div style={{ minWidth: "768px" }} className="w-full">
           <nav className="bg-white border-gray-200 px-2 py-2.5 rounded">
             <div className="container">
               <div className="w-full" id="navbar-default">
@@ -68,17 +93,18 @@ function App() {
                     <NavLink to="/" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/bills" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้า 2</NavLink>
+                    <NavLink to="/orders" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง/ยกเลิก</NavLink>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
           <div className="mx-auto py-10 h-64 w-full px-3">
-            <div className="w-full h-full bg-gray-50">
+            <div className="w-full h-full">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/bills" element={<Bills />} />
+                <Route path="/orders" element={<Orders />} />
+                <Route path="/bills" element={<Orders />} />
               </Routes>
             </div>
           </div>
