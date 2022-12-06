@@ -39,23 +39,48 @@ function App() {
             <ul className="mt-12">
               <div className='flex flex-col'>
                 <div className='flex flex-row'>
-                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                  <li className="flex w-full justify-between text-white font-light items-center">
                     <span>User</span>
                     <span>asd</span>
                   </li>
                 </div>
 
                 <div className='flex flex-row'>
-                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                  <li className="flex w-full justify-between text-white font-light items-center">
                     <span>Role</span>
                     <span>asd</span>
                   </li>
                 </div>
 
                 <div className='flex flex-row'>
-                  <li className="flex w-full justify-between text-white font-light hover:text-gray-300 cursor-pointer items-center">
+                  <li className="flex w-full justify-between text-white font-light items-center">
                     <span>Balance</span>
                     <span>asd</span>
+                  </li>
+                </div>
+
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-between text-white font-light items-center">
+                    <table className='border-collapse border border-slate-400'>
+                      <thead>
+                        <tr>
+                          <th>asd</th>
+                          <th>asd</th>
+                          <th>asd</th>
+                          <th>asd</th>
+                          <th>asd</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>asd</td>
+                          <td>asd</td>
+                          <td>asd</td>
+                          <td>asd</td>
+                          <td>asd</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </li>
                 </div>
 
@@ -104,7 +129,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/orders" element={<Orders />} />
-                <Route path="/bills" element={<Orders />} />
+                <Route path="/bills" element={<Bills />} />
               </Routes>
             </div>
           </div>
