@@ -6,7 +6,7 @@ type TypeDate = {
     endDate: string | Date | null
 } | null
 
-export function OrderAll() {
+export function OrderList() {
     const [isDate, setDate] = useState<TypeDate>({
         startDate: new Date(),
         endDate: new Date().setMonth(11).toString()
@@ -18,13 +18,13 @@ export function OrderAll() {
     }
 
     return (
-        <div id="order_all" className="flex flex-row">
+        <div id="order_list" className="flex flex-row">
             <div id="order_content" className="w-full">
                 <div id="order_header" className="flex flex-col w-full">
                     <strong className="text-lg h-10 text-[blue]">รายการแทง</strong>
                     <div className="flex flex-col border rounded w-full p-4">
                         <strong>ตัวเลือกการค้นหา</strong>
-                        <div className="flex flex-row mt-5">
+                        <div className="flex flex-row mt-3">
                             <div className="flex items-center mr-6">
                                 <input defaultChecked id="today" type="radio" name="order_filter" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                 <label htmlFor="today" className="font-bold ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">วันนี้</label>
@@ -43,7 +43,7 @@ export function OrderAll() {
                             </div>
                         </div>
 
-                        <div className="flex flex-row mt-5">
+                        <div className="flex flex-row mt-3">
                             <div className="flex items-center mr-6">
                                 <input id="month" type="radio" name="order_filter" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                 <label htmlFor="month" className="font-bold ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">เดือน</label>
@@ -68,7 +68,7 @@ export function OrderAll() {
                             </div>
                         </div>
 
-                        <div className="flex flex-row mt-5 whitespace-nowrap">
+                        <div className="flex flex-row mt-3 whitespace-nowrap">
                             <div className="flex items-center mr-6">
                                 <input id="custom_date" type="radio" name="order_filter" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
                                 <label htmlFor="custom_date" className="font-bold ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">เลือกวันที่</label>
@@ -91,12 +91,59 @@ export function OrderAll() {
                             </div>
                         </div>
 
-                        <div className="flex flex-row mt-5">
-                            <button className="inline-flex text-xs bg-blue-500 hover:bg-blue-400 text-white font-light p-2 px-4 rounded shadow mb-2">
+                        <div className="flex flex-row mt-3">
+                            <button className="inline-flex font-bold text-xs bg-blue-800 hover:bg-blue-700 text-white font-light p-2 px-4 rounded-md shadow">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
                                 </svg>
                                 ค้นหา</button>
+                        </div>
+
+                        <div className="flex flex-row mt-3">
+                            <table className="border-collapse border border-slate-400 w-full text-center">
+                                <thead className="bg-blue-800 text-white text-xs">
+                                    <tr>
+                                        <th>วันที่</th>
+                                        <th>ชนิดหวย</th>
+                                        <th>ชื่องวด</th>
+                                        <th>ยอดแทง</th>
+                                        <th>ส่วนลด</th>
+                                        <th>ถูกรางวัล</th>
+                                        <th>แพ้/ชนะ</th>
+                                        <th>หมายเหตุ</th>
+                                        <th>#</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td className="border border-slate-300 font-light">2022-12-09 00:00:00</td>
+                                        <td className="border border-slate-300 font-light">ดาวโจนส์ VIP</td>
+                                        <td className="border border-slate-300 font-light">2022-12-08</td>
+                                        <td className="border border-slate-300 text-green-600">70</td>
+                                        <td className="border border-slate-300">0</td>
+                                        <td className="border border-slate-300 text-red-500">ไม่ถูกรางวัล</td>
+                                        <td className="border border-slate-300 text-red-500">-70</td>
+                                        <td className="border border-slate-300 font-light">พี่อิน</td>
+                                        <td className="border border-slate-300 font-light">
+                                            <div className="flex flex-row justify-around items-center">
+                                                <button className="text-[blue] hover:text-blue-500 hover:bg-gray-100">ดูรายละเอียด</button>
+                                                <button className="text-xs text-red-600 hover:text-red-400 font-bold p-2 rounded shadow mx-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                                                    </svg></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colSpan={3} className="border border-slate-300 bg-gray-200">รวม</td>
+                                        <td className="border border-slate-300 bg-gray-200 text-green-600">70</td>
+                                        <td className="border border-slate-300 bg-gray-200">0</td>
+                                        <td className="border border-slate-300 bg-gray-200 text-green-600">0</td>
+                                        <td className="border border-slate-300 bg-gray-200 text-red-500">-70</td>
+                                        <td colSpan={2} className="border border-slate-300 bg-gray-200"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>

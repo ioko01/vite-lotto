@@ -1,41 +1,44 @@
-export function Bills() {
+export function Bill() {
     return (
         <div id="bill" className="flex flex-row">
             <div className="basis-3/6 w-full p-2">
                 <div id="bill_content" style={{ minWidth: "420px", maxWidth: "568px" }} className="flex flex-col items-center">
-                    <div id="bill_header" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
+                    <div id="bill_time" className="flex flex-col w-full mb-3 p-2 text-red-500">
+                        เหลือเวลา 02: 35: 08
+                    </div>
+                    <div id="bill_header" className="flex flex-col items-center rounded-lg border border-green-400 bg-green-100 w-full mb-3 p-2">
                         <div className="flex justify-between w-full p-2">
-                            <span>order 1</span>
+                            <span>ดาวโจนส์ VIP</span>
                             <span>2022-12-65</span>
                         </div>
                         <div className="flex justify-between w-full p-2">
                             <span>อัตราจ่าย</span>
                             <span>95</span>
                             <span>ดูรายละเอียด</span>
-                            <span><img src="..." alt="รูป" className="object-cover" /></span>
+                            <span><img width={60} src="../../public/jones.jpg" alt="jones" className="object-cover" /></span>
                         </div>
                     </div>
 
-                    <div id="bill_body" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
+                    <div id="bill_body" className="flex flex-col items-center rounded-lg border border-green-400 bg-green-100 w-full mb-3 p-2">
                         <div className="w-full p-2">
-                            <span>order 1</span>
+                            <span>แทงเร็ว</span>
                         </div>
                         <div className="flex justify-between w-full p-2">
-                            <span>order 1</span>
+                            <span>ดาวโจนส์ VIP</span>
                             <span>2022-12-65</span>
                         </div>
                         <div className="border-t w-full"></div>
                         <div className="flex justify-evenly w-full p-2">
                             <div className="w-full">
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">2 ตัว</button>
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">3 ตัว</button>
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">6 กลับ</button>
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">19 ประตู</button>
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">เลขวิ่ง</button>
-                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 rounded shadow mx-2 mb-2">วินเลข</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">2 ตัว</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">3 ตัว</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">6 กลับ</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">19 ประตู</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">เลขวิ่ง</button>
+                                <button style={{ width: "60px" }} className="text-xs bg-white hover:bg-gray-200 text-gray-800 font-semibold p-2 border border-gray-400 bg-gray-100 rounded shadow mx-2 mb-2">วินเลข</button>
                             </div>
                             <div>
-                                <img src="..." alt="รูป" />
+                                <img width={60} src="../../public/jones.jpg" alt="jones" />
                             </div>
                         </div>
                         <div className="flex justify-between w-full p-2">

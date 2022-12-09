@@ -1,33 +1,20 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { Home } from './components/Home'
-import { Bills } from './components/Bills'
-import { OrderAll } from './components/OrderAll'
+import { Bill } from './components/Bill'
+import { OrderList } from './components/OrderList'
 import { OrderGroup } from './components/OrderGroup'
-
-
-
-// function sidebarHandler(flag: boolean) {
-//   const sideBar = document.getElementById("mobile-nav");
-//   const openSidebar = document.getElementById("openSideBar");
-//   const closeSidebar = document.getElementById("closeSideBar");
-//   sideBar.style.transform = "translateX(-260px)";
-//   if (flag) {
-//     sideBar.style.transform = "translateX(0px)";
-//     openSidebar.classList.add("hidden");
-//     closeSidebar.classList.remove("hidden");
-//   } else {
-//     sideBar.style.transform = "translateX(-260px)";
-//     closeSidebar.classList.add("hidden");
-//     openSidebar.classList.remove("hidden");
-//   }
-// }
+import { Report } from './components/Report'
+import { Reward } from './components/Reward'
+import { Rule } from './components/Rule'
+import { Howto } from './components/Howto'
+import { Link } from './components/Link'
 
 function App() {
 
   return (
     <div className="w-full h-full">
       <div className="flex flex-no-wrap h-full">
-        <div style={{ minHeight: "716px", minWidth: "220px" }} className="absolute relative bg-gray-800 shadow h-full flex-col justify-between">
+        <div style={{ minHeight: "716px", minWidth: "180px" }} className="absolute relative bg-gray-800 shadow h-full flex-col justify-between">
           <div className="px-2">
             <div className="h-16 w-full flex items-center justify-center">
               <svg aria-label="Ripples. Logo" role="img" xmlns="http://www.w3.org/2000/svg" width="144" height="30" viewBox="0 0 144 30">
@@ -87,7 +74,7 @@ function App() {
                   </li>
                 </div>
                 <div className='flex flex-row'>
-                  <li className="flex w-full justify-center text-white font-light items-center text-center">
+                  <li className="flex w-full justify-center text-white items-center text-center">
                     <table className='table w-full text-xs'>
                       <thead>
                         <tr>
@@ -100,46 +87,46 @@ function App() {
                       </thead>
                       <tbody>
                         <tr>
-                          <td className='border px-1'>วิ่งบน</td>
-                          <td className='border px-1'>3</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>10,000</td>
+                          <td className='border px-1 font-light'>วิ่งบน</td>
+                          <td className='border px-1 font-light'>3</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>10,000</td>
                         </tr>
                         <tr>
-                          <td className='border px-1'>วิ่งล่าง</td>
-                          <td className='border px-1'>4</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>10,000</td>
+                          <td className='border px-1 font-light'>วิ่งล่าง</td>
+                          <td className='border px-1 font-light'>4</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>10,000</td>
                         </tr>
                         <tr>
-                          <td className='border px-1'>2 ตัวบน</td>
-                          <td className='border px-1'>95</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>2,000</td>
+                          <td className='border px-1 font-light'>2 ตัวบน</td>
+                          <td className='border px-1 font-light'>95</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>2,000</td>
                         </tr>
                         <tr>
-                          <td className='border px-1'>2 ตัวล่าง</td>
-                          <td className='border px-1'>95</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>2,000</td>
+                          <td className='border px-1 font-light'>2 ตัวล่าง</td>
+                          <td className='border px-1 font-light'>95</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>2,000</td>
                         </tr>
                         <tr>
-                          <td className='border px-1'>3 ตัวบน</td>
-                          <td className='border px-1'>800</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>2,000</td>
+                          <td className='border px-1 font-light'>3 ตัวบน</td>
+                          <td className='border px-1 font-light'>800</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>2,000</td>
                         </tr>
                         <tr>
-                          <td className='border px-1'>3 ตัวโต๊ด</td>
-                          <td className='border px-1'>125</td>
-                          <td className='border px-1'>0</td>
-                          <td className='border px-1'>1</td>
-                          <td className='border px-1'>2,000</td>
+                          <td className='border px-1 font-light'>3 ตัวโต๊ด</td>
+                          <td className='border px-1 font-light'>125</td>
+                          <td className='border px-1 font-light'>0</td>
+                          <td className='border px-1 font-light'>1</td>
+                          <td className='border px-1 font-light'>2,000</td>
                         </tr>
                       </tbody>
                     </table>
@@ -152,18 +139,73 @@ function App() {
         </div>
 
         <div style={{ minWidth: "768px" }} className="w-full">
-          <nav className="bg-white border-gray-200 px-2 py-2.5 rounded">
+          <nav className="bg-white border-b border-gray-200 rounded">
             <div className="container">
               <div className="w-full" id="navbar-default">
-                <ul className="w-full flex flex-row p-4 mt-0 rounded-lg text-sm font-medium border-0">
+                <ul className="w-full flex flex-row py-4 mt-0 rounded-lg text-sm font-medium border-0">
                   <li>
-                    <NavLink end to="/" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
+                    <NavLink end to="/" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h12M8.25 12h12m-12 5.25h12M3.75 6.75h.007v.008H3.75V6.75zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zM3.75 12h.007v.008H3.75V12zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm-.375 5.25h.007v.008H3.75v-.008zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                      </svg>
+
+                      &nbsp;แทงหวย</NavLink>
                   </li>
                   <li>
-                    <NavLink end to="/orders" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง/ยกเลิกโพย</NavLink>
+                    <NavLink end to="/orders/list" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                      </svg>
+
+                      &nbsp;รายการแทง/ยกเลิกโพย</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/orders/group" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง (ตามชนิดหวย)</NavLink>
+                    <NavLink to="/orders/group" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
+                      </svg>
+
+                      &nbsp;รายการแทง (ตามชนิดหวย)</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/report" className={({ isActive }) => "flex flex-row block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6h-.75m0 0v-.375c0-.621.504-1.125 1.125-1.125H20.25M2.25 6v9m18-10.5v.75c0 .414.336.75.75.75h.75m-1.5-1.5h.375c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-.375m1.5-1.5H21a.75.75 0 00-.75.75v.75m0 0H3.75m0 0h-.375a1.125 1.125 0 01-1.125-1.125V15m1.5 1.5v-.75A.75.75 0 003 15h-.75M15 10.5a3 3 0 11-6 0 3 3 0 016 0zm3 0h.008v.008H18V10.5zm-12 0h.008v.008H6V10.5z" />
+                      </svg>
+
+                      &nbsp;บัญชีการเงิน</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/reward" className={({ isActive }) => "flex flex-row block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z" />
+                      </svg>
+
+                      &nbsp;ตรวจรางวัล</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about/rule" className={({ isActive }) => "flex flex-row block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                      </svg>
+
+                      &nbsp;กฏกติกา</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about/howto" className={({ isActive }) => "flex flex-row block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M9.879 7.519c1.171-1.025 3.071-1.025 4.242 0 1.172 1.025 1.172 2.687 0 3.712-.203.179-.43.326-.67.442-.745.361-1.45.999-1.45 1.827v.75M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9 5.25h.008v.008H12v-.008z" />
+                      </svg>
+
+                      &nbsp;วิธีเล่นหวย</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/about/link" className={({ isActive }) => "flex flex-row block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244" />
+                      </svg>
+
+                      &nbsp;ลิงค์ดูผล</NavLink>
                   </li>
                 </ul>
               </div>
@@ -173,9 +215,14 @@ function App() {
             <div className="w-full h-full">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/bills" element={<Bills />} />
-                <Route path="/orders" element={<OrderAll />} />
+                <Route path="/bills" element={<Bill />} />
+                <Route path="/orders/list" element={<OrderList />} />
                 <Route path="/orders/group" element={<OrderGroup />} />
+                <Route path="/report" element={<Report />} />
+                <Route path="/reward" element={<Reward />} />
+                <Route path="/about/rule" element={<Rule />} />
+                <Route path="/about/howto" element={<Howto />} />
+                <Route path="/about/link" element={<Link />} />
               </Routes>
             </div>
           </div>
