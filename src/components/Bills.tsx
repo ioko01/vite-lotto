@@ -2,8 +2,8 @@ export function Bills() {
     return (
         <div id="bill" className="flex flex-row">
             <div className="basis-3/6 w-full p-2">
-                <div id="bill-content" style={{ minWidth: "420px", maxWidth: "568px" }} className="flex flex-col items-center">
-                    <div id="bill-header" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
+                <div id="bill_content" style={{ minWidth: "420px", maxWidth: "568px" }} className="flex flex-col items-center">
+                    <div id="bill_header" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
                         <div className="flex justify-between w-full p-2">
                             <span>order 1</span>
                             <span>2022-12-65</span>
@@ -16,7 +16,7 @@ export function Bills() {
                         </div>
                     </div>
 
-                    <div id="bill-body" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
+                    <div id="bill_body" className="flex flex-col items-center rounded-lg border w-full mb-3 p-2">
                         <div className="w-full p-2">
                             <span>order 1</span>
                         </div>
@@ -86,7 +86,7 @@ export function Bills() {
                         </div>
                     </div>
 
-                    <div id="bill-footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
+                    <div id="bill_footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
                         <div className="flex justify-center w-full p-2 gap-2">
                             <span>หมายเหตุ: </span>
                             <input type="text" className="border-b w-full" />

@@ -1,7 +1,8 @@
 import { NavLink, Route, Routes } from 'react-router-dom'
 import { Home } from './components/Home'
 import { Bills } from './components/Bills'
-import { Orders } from './components/Orders'
+import { OrderAll } from './components/OrderAll'
+import { OrderGroup } from './components/OrderGroup'
 
 
 
@@ -156,10 +157,13 @@ function App() {
               <div className="w-full" id="navbar-default">
                 <ul className="w-full flex flex-row p-4 mt-0 rounded-lg text-sm font-medium border-0">
                   <li>
-                    <NavLink to="/" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
+                    <NavLink end to="/" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>หน้าแรก</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/orders" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง/ยกเลิก</NavLink>
+                    <NavLink end to="/orders" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง/ยกเลิกโพย</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="/orders/group" className={({ isActive }) => "block pl-3" + (isActive ? " active" : "")}>รายการแทง (ตามชนิดหวย)</NavLink>
                   </li>
                 </ul>
               </div>
@@ -169,8 +173,9 @@ function App() {
             <div className="w-full h-full">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/orders" element={<Orders />} />
                 <Route path="/bills" element={<Bills />} />
+                <Route path="/orders" element={<OrderAll />} />
+                <Route path="/orders/group" element={<OrderGroup />} />
               </Routes>
             </div>
           </div>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Home() {
     return (
-        <div className="flex flex-row">
+        <div id="home" className="flex flex-row">
             <div className="p-2 xl:basis-1/5 lg:basis-1/4 basis-1/3">
                 <Link to="/bills" className="flex flex-col items-center bg-white border rounded-none shadow-md hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div className="flex flex-row items-center p-2 w-full">
