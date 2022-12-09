@@ -90,6 +90,14 @@ export function OrderAll() {
                                 />
                             </div>
                         </div>
+
+                        <div className="flex flex-row mt-5">
+                            <button className="inline-flex text-xs bg-blue-500 hover:bg-blue-400 text-white font-light p-2 px-4 rounded shadow mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                                </svg>
+                                ค้นหา</button>
+                        </div>
                     </div>
                 </div>
             </div>
