@@ -59,33 +59,8 @@ function App() {
                   </li>
                 </div>
 
-                <div className='flex flex-row'>
-                  <li className="flex w-full justify-between text-white font-light items-center">
-                    <table className='border-collapse border border-slate-400'>
-                      <thead>
-                        <tr>
-                          <th>asd</th>
-                          <th>asd</th>
-                          <th>asd</th>
-                          <th>asd</th>
-                          <th>asd</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>asd</td>
-                          <td>asd</td>
-                          <td>asd</td>
-                          <td>asd</td>
-                          <td>asd</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </li>
-                </div>
-
-                <div className='flex flex-row'>
-                  <li className="flex w-full justify-evenly text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                <div className='flex flex-row my-3'>
+                  <li className="flex w-full justify-evenly text-yellow-600 hover:text-yellow-700 cursor-pointer items-center">
                     <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
@@ -93,7 +68,7 @@ function App() {
                       <span className="text-xs ml-2">ข้อมูลส่วนตัว</span>
                     </NavLink>
                   </li>
-                  <li className="flex w-full justify-evenly text-gray-400 hover:text-gray-300 cursor-pointer items-center">
+                  <li className="flex w-full justify-evenly text-yellow-600 hover:text-yellow-700 cursor-pointer items-center">
                     <NavLink to="/" className="flex items-center focus:outline-none focus:ring-2 focus:ring-white">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M5.636 5.636a9 9 0 1012.728 0M12 3v9" />
@@ -101,6 +76,72 @@ function App() {
 
                       <span className="text-xs ml-2">ออกจากระบบ</span>
                     </NavLink>
+                  </li>
+                </div>
+
+                <div className='flex flex-row mt-2'>
+                  <li className="flex w-full justify-between text-white text-sm">
+                    <p>อัตราจ่าย</p>
+                    <p>หวยไทย</p>
+                  </li>
+                </div>
+                <div className='flex flex-row'>
+                  <li className="flex w-full justify-center text-white font-light items-center text-center">
+                    <table className='table w-full text-xs'>
+                      <thead>
+                        <tr>
+                          <th className='border px-1 bg-white text-gray-700'>อัตราจ่าย</th>
+                          <th className='border px-1 bg-white text-gray-700'>จ่าย<br />(บาท)</th>
+                          <th className='border px-1 bg-white text-gray-700'>ลด<br />(%)</th>
+                          <th className='border px-1 bg-white text-gray-700'>ขั้นต่ำ<br />(บาท)</th>
+                          <th className='border px-1 bg-white text-gray-700'>ขั้นสูง<br />(บาท)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td className='border px-1'>วิ่งบน</td>
+                          <td className='border px-1'>3</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>10,000</td>
+                        </tr>
+                        <tr>
+                          <td className='border px-1'>วิ่งล่าง</td>
+                          <td className='border px-1'>4</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>10,000</td>
+                        </tr>
+                        <tr>
+                          <td className='border px-1'>2 ตัวบน</td>
+                          <td className='border px-1'>95</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>2,000</td>
+                        </tr>
+                        <tr>
+                          <td className='border px-1'>2 ตัวล่าง</td>
+                          <td className='border px-1'>95</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>2,000</td>
+                        </tr>
+                        <tr>
+                          <td className='border px-1'>3 ตัวบน</td>
+                          <td className='border px-1'>800</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>2,000</td>
+                        </tr>
+                        <tr>
+                          <td className='border px-1'>3 ตัวโต๊ด</td>
+                          <td className='border px-1'>125</td>
+                          <td className='border px-1'>0</td>
+                          <td className='border px-1'>1</td>
+                          <td className='border px-1'>2,000</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </li>
                 </div>
 
