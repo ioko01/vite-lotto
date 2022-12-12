@@ -1,19 +1,19 @@
-import { incrementByAmount } from "../redux/actions/modalSlice";
-import { useAppSelector } from "../redux/hooks";
+import { stateModal } from "../redux/features/modal/modalSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 
 export function ModalDelete() {
-
-    const isModal = useAppSelector(state => state.modals.value)
-
+    const dispatch = useAppDispatch()
+    const modal = useAppSelector(state => state.modal.show)
+    
     return (
         <>
-            {isModal ? (
+            {modal ? (
                 <>
                     <div className="fixed inset-0 z-10 overflow-y-auto">
                         <div
                             className="fixed inset-0 w-full h-full bg-black opacity-40"
-                            onClick={() => incrementByAmount(false)}
+                            onClick={() => dispatch(stateModal(false))}
                         ></div>
                         <div className="flex items-center min-h-screen px-4 py-8">
                             <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
@@ -45,13 +45,13 @@ export function ModalDelete() {
                                         <div className="items-center gap-2 mt-3 sm:flex">
                                             <button
                                                 className="w-full mt-2 p-2.5 flex-1 text-white bg-red-600 rounded-md outline-none ring-offset-2 ring-red-600 focus:ring-2"
-                                                onClick={() => incrementByAmount(false)}
+                                                onClick={() => dispatch(stateModal(false))}
                                             >
                                                 Delete
                                             </button>
                                             <button
                                                 className="w-full mt-2 p-2.5 flex-1 text-gray-800 rounded-md outline-none border ring-offset-2 ring-indigo-600 focus:ring-2"
-                                                onClick={() => incrementByAmount(false)}
+                                                onClick={() => dispatch(stateModal(false))}
                                             >
                                                 Cancel
                                             </button>

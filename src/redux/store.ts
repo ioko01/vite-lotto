@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit'
-import modalSlice from './actions/modalSlice'
+import modalReducer from './features/modal/modalSlice'
 // ...
 
 export const store = configureStore({
     reducer: {
-        modals: modalSlice
+        modal: modalReducer
     },
 })
 
