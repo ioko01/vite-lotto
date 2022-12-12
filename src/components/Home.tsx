@@ -4,7 +4,7 @@ export function Home() {
     return (
         <div id="home" className="flex flex-row">
             <div className="p-2 xl:basis-1/5 lg:basis-1/4 basis-1/3">
-                <Link to="/bills" className="flex flex-col items-center text-white bg-green-600 rounded-none shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
+                <Link to="/bill" className="flex flex-col items-center text-white bg-green-600 rounded-none shadow-md dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
                     <div className="flex flex-row items-center p-2 w-full">
                         <img className="object-cover w-auto h-96 h-auto rounded-none" src="../../public/jones.jpg" alt="jones" />
                         <div className="flex text-end w-full flex-col justify-between leading-normal">

@@ -8,6 +8,7 @@ import { Reward } from './components/Reward'
 import { Rule } from './components/Rule'
 import { Howto } from './components/Howto'
 import { Link } from './components/Link'
+import { BillCheck } from './components/BillCheck'
 
 function App() {
 
@@ -152,7 +153,7 @@ function App() {
                       &nbsp;แทงหวย</NavLink>
                   </li>
                   <li>
-                    <NavLink end to="/orders/list" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                    <NavLink end to="/order/list" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                       </svg>
@@ -160,7 +161,7 @@ function App() {
                       &nbsp;รายการแทง/ยกเลิกโพย</NavLink>
                   </li>
                   <li>
-                    <NavLink to="/orders/group" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
+                    <NavLink to="/order/group" className={({ isActive }) => "flex flex-row items-center block pl-3 whitespace-nowrap" + (isActive ? " active" : "")}>
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
                       </svg>
@@ -215,14 +216,15 @@ function App() {
             <div className="w-full h-full">
               <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/bills" element={<Bill />} />
-                <Route path="/orders/list" element={<OrderList />} />
-                <Route path="/orders/group" element={<OrderGroup />} />
+                <Route path="/bill" element={<Bill />} />
+                <Route path="/order/list" element={<OrderList />} />
+                <Route path="/order/group" element={<OrderGroup />} />
                 <Route path="/report" element={<Report />} />
                 <Route path="/reward" element={<Reward />} />
                 <Route path="/about/rule" element={<Rule />} />
                 <Route path="/about/howto" element={<Howto />} />
                 <Route path="/about/link" element={<Link />} />
+                <Route path="/bill/check" element={<BillCheck />} />
               </Routes>
             </div>
           </div>
