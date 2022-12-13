@@ -1,7 +1,6 @@
 import { stateModal } from "../redux/features/modal/modalSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
-
 export function ModalDetail() {
     const dispatch = useAppDispatch()
     const modal = useAppSelector(state => state.modal)
