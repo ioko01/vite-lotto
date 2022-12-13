@@ -6,13 +6,16 @@ import './assets/fonts/FC_Minimal_Regular.ttf'
 import './index.css'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import { AuthContextProvider } from './context/AuthContextProvider'
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </Provider>
+    <AuthContextProvider>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
+    </AuthContextProvider>
   </React.StrictMode>
 )

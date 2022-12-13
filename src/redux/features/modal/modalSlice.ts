@@ -1,31 +1,30 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
 
-// Define a type for the slice state
+type Modal = "DETAIL" | "DELETE"
+
 interface ModalState {
-  show: boolean
+  show: boolean,
+  openModal: Modal
 }
 
-// Define the initial state using that type
 const initialState: ModalState = {
   show: false,
+  openModal: "DELETE"
 }
 
 export const modalSlice = createSlice({
   name: 'modal',
-  // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
-    stateModal: (state, action: PayloadAction<boolean>) => {
+    stateModal: (state, action: PayloadAction<ModalState>) => {
       const modal = action.payload
-      state.show = modal
+      state.show = modal.show
+      state.openModal = modal.openModal
     }
   },
 })
 
 export const { stateModal } = modalSlice.actions
-
-// Other code such as selectors can use the imported `RootState` type
-export const selectModal = (state: RootState) => state.modal.show
-
+export const selectModal = (state: RootState) => state.modal
 export default modalSlice.reducer
