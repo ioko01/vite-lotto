@@ -14,7 +14,7 @@ export function ModalDetail() {
                             onClick={() => dispatch(stateModal({ show: false, openModal: "DETAIL" }))}
                         ></div>
                         <div className="flex items-center min-h-screen px-4 py-8">
-                            <div className="relative w-full max-w-lg p-4 mx-auto bg-white rounded-md shadow-lg">
+                            <div className="relative w-full max-w-lg p-4 mx-auto bg-white shadow-lg">
                                 <div className="text-right">
                                     <button onClick={() => dispatch(stateModal({ show: false, openModal: "DETAIL" }))} className="text-xs text-gray-400 hover:text-gray-300 font-bold p-2 rounded shadow mx-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
