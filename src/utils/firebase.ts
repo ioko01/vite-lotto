@@ -1,4 +1,5 @@
 import { FirebaseOptions, initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 import { getAuth } from 'firebase/auth'
 
 const FIREBASE_CONFIG: FirebaseOptions = {
@@ -12,7 +13,7 @@ const FIREBASE_CONFIG: FirebaseOptions = {
     measurementId: import.meta.env.VITE_OPS_FIREBASE_MEASUREMENT_ID
 }
 
-const Firebase = initializeApp(FIREBASE_CONFIG)
-
-export const auth = getAuth(Firebase)
+const app = initializeApp(FIREBASE_CONFIG)
+export const db = getFirestore(app)
+export const auth = getAuth(app)
 

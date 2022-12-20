@@ -1,4 +1,4 @@
-import {
+import React, {
     ReactNode,
     useEffect,
     useState,
@@ -28,7 +28,6 @@ export interface UserContextState {
 export const UserStateContext = createContext<UserContextState>(
     {} as UserContextState,
 )
-
 export interface AuthContextModel {
     auth: Auth
     user: User | null
@@ -37,7 +36,7 @@ export interface AuthContextModel {
     sendPasswordResetEmail?: (email: string) => Promise<void>
 }
 
-export const AuthContext = createContext(
+export const AuthContext = React.createContext<AuthContextModel>(
     {} as AuthContextModel,
 )
 
@@ -55,11 +54,9 @@ export const AuthContextProvider = ({ children }: AuthProviderProps): JSX.Elemen
     function signIn(email: string, password: string): Promise<UserCredential> {
         return signInWithEmailAndPassword(auth, email, password)
     }
-
     function resetPassword(email: string): Promise<void> {
         return sendPasswordResetEmail(auth, email)
     }
-
     useEffect(() => {
         //function that firebase notifies you if a user is set
         const unsubsrcibe = auth.onAuthStateChanged((user) => {
@@ -75,12 +72,7 @@ export const AuthContextProvider = ({ children }: AuthProviderProps): JSX.Elemen
         resetPassword,
         auth,
     }
-
-    return (
-        <AuthContext.Provider value={values} >
-            {children}
-        </AuthContext.Provider>
-    )
+    return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>
 }
 
 export const useUserContext = (): UserContextState => {
