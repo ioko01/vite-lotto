@@ -21,7 +21,7 @@ function App() {
       setLoading(false)
     }, 100)
   }
-  const authUser = false;
+  const authUser = true;
 
   return (
     !loading ? (
