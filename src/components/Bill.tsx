@@ -116,10 +116,14 @@ export function Bill() {
         setDigitsTemp(digitsTemp.filter((_, index) => index !== parseInt(e.currentTarget.value)))
 
 
-    const removeBillTemp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) =>
+    const removeBillTemp = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         setBillTemp(billTemp.filter((_, index) => index !== parseInt(e.currentTarget.value)))
+        setPrice(price.filter((_, index) => index !== parseInt(e.currentTarget.value)))
+    }
+
 
     useEffect(() => {
+        console.log(billTemp);
     }, [digitsTemp, billTemp, price])
 
     return (
@@ -241,7 +245,7 @@ export function Bill() {
                                                 <div key={"digit_" + index} className="w-3/5 h-full bg-white p-2">
                                                     {
                                                         bill.digit.map((digit, index) => (
-                                                            <span key={"number_" + index} className="px-2 inline-block font-light">{digit!.split(":")[0]!}</span>
+                                                            <span key={"number_" + index} className="px-1 inline-block font-light">{digit!.split(":")[0]!}&nbsp;</span>
                                                         ))
                                                     }
                                                 </div>
