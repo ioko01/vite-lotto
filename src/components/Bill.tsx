@@ -13,20 +13,30 @@ export function Bill() {
     const [digitsType, setDigitsType] = useState<TDigit>("TWO")
     const [digitsTemp, setDigitsTemp] = useState<string[]>([])
     const [billTemp, setBillTemp] = useState<Bill[]>([])
+    const [price, setPrice] = useState<number[]>([])
     const digitRef = useRef<HTMLInputElement>(null)
     const priceTopRef = useRef<HTMLInputElement>(null)
     const priceBottomRef = useRef<HTMLInputElement>(null)
     const regex = /[\D\sa-zA-Zก-ฮ]/;
 
+    const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+        const value = e.currentTarget!.value as TDigit
+        if (digitsTemp.length > 0) {
+            alert(value)
+        } else {
+            setDigitsType(value)
+            document.getElementById("input_digits")!.focus()
+        }
+    }
 
-    const setDigitOne = () => digitsTemp.length > 0 ? alert("setDigitOne") : setDigitsType("ONE")
-    const setDigitTwo = () => digitsTemp.length > 0 ? alert("setDigitTwo") : setDigitsType("TWO")
-    const setDigitThree = () => digitsTemp.length > 0 ? alert("setDigitThree") : setDigitsType("THREE")
-    const setDigitSix = () => digitsTemp.length > 0 ? alert("setDigitSix") : setDigitsType("SIX")
-    const setDigitNineteen = () => digitsTemp.length > 0 ? alert("setDigitNineteen") : setDigitsType("NINETEEN")
-    const setDigitWin = () => digitsTemp.length > 0 ? alert("setDigitWin") : setDigitsType("WIN")
-    const setDigitDouble = () => digitsType === "TWO" ? setDigitsTemp([...digitsTemp, "00", "11", "22", "33", "44", "55", "66", "77", "88", "99"]) : null
-    const setDigitTriple = () => digitsType === "THREE" ? setDigitsTemp([...digitsTemp, "000", "111", "222", "333", "444", "555", "666", "777", "888", "999"]) : null
+    const addDigitDoubleAndTripleValue = () => {
+        if (digitsType === "TWO") {
+            setDigitsTemp([...digitsTemp, "00", "11", "22", "33", "44", "55", "66", "77", "88", "99"])
+        } else if (digitsType === "THREE") {
+            setDigitsTemp([...digitsTemp, "000", "111", "222", "333", "444", "555", "666", "777", "888", "999"])
+        }
+        document.getElementById("input_digits")!.focus()
+    }
 
     const inputTemps = () => {
         if (digitsType === "TWO") {
@@ -71,6 +81,13 @@ export function Bill() {
         }
     }
 
+    const addBillTempKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        const tab = "tab"
+        if (e.code.toLowerCase() === tab) {
+            addBillTemp()
+        }
+    }
+
     const addBillTemp = () => {
         const bill = digitsTemp.map((digitTemp) => {
             return digitTemp + ":" + (priceTopRef.current?.value ? priceTopRef.current!.value : "0") + ":" + (priceBottomRef.current?.value ? priceBottomRef.current!.value : "0")
@@ -80,20 +97,27 @@ export function Bill() {
             if (!priceTopRef.current?.value && !priceBottomRef.current?.value) {
                 alert("กรุณาใส่ราคา");
             } else {
+                const priceSum = ((priceTopRef.current!.value ? parseInt(priceTopRef.current!.value) : 0) * bill.length) + ((priceBottomRef.current?.value ? parseInt(priceBottomRef.current!.value) : 0) * bill.length)
+                setPrice([...price, priceSum])
+
                 setBillTemp([...billTemp, { digit_type: digitsType, digit: bill }])
                 priceTopRef.current!.value = ""
                 priceBottomRef.current!.value = ""
                 setDigitsTemp([])
             }
         }
+
+        setTimeout(() => {
+            document.getElementById("input_digits")!.focus()
+        }, 100)
     }
 
     useEffect(() => {
-
-    }, [digitsTemp, billTemp])
+        console.log(price);
+    }, [digitsTemp, billTemp, price])
 
     return (
-        <div id="bill" className="flex flex-col">
+        <div id="bill" className="flex flex-col" onLoad={() => document.getElementById("input_digits")!.focus()}>
             <div className="basis-full w-full p-2">
                 <div id="bill_time" className="flex flex-col w-full mb-3 p-2 text-red-500">
                     เหลือเวลา 02: 35: 08
@@ -127,12 +151,12 @@ export function Bill() {
                             <div className="border-t w-full"></div>
                             <div className="flex justify-evenly w-full p-2">
                                 <div className="w-full">
-                                    <button onClick={setDigitTwo} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "TWO" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>2 ตัว</button>
-                                    <button onClick={setDigitThree} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "THREE" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>3 ตัว</button>
-                                    <button onClick={setDigitSix} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "SIX" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>6 กลับ</button>
-                                    <button onClick={setDigitNineteen} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "NINETEEN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>19 ประตู</button>
-                                    <button onClick={setDigitOne} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "ONE" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>เลขวิ่ง</button>
-                                    <button onClick={setDigitWin} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "WIN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>วินเลข</button>
+                                    <button value={"TWO" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "TWO" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>2 ตัว</button>
+                                    <button value={"THREE" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "THREE" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>3 ตัว</button>
+                                    <button value={"SIX" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "SIX" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>6 กลับ</button>
+                                    <button value={"NINETEEN" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "NINETEEN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>19 ประตู</button>
+                                    <button value={"ONE" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "ONE" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>เลขวิ่ง</button>
+                                    <button value={"WIN" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "WIN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>วินเลข</button>
                                 </div>
                                 <div>
                                     <img width={60} src="../../public/jones.jpg" alt="jones" />
@@ -157,14 +181,14 @@ export function Bill() {
                             <div className="flex justify-between w-full p-2">
                                 {
                                     digitsType === "TWO" ?
-                                        <button onClick={setDigitDouble} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
+                                        <button onClick={addDigitDoubleAndTripleValue} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                             </svg>
                                             &nbsp;เลขเบิ้ล</button>
                                         :
                                         digitsType === "THREE" ?
-                                            <button onClick={setDigitTriple} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
+                                            <button onClick={addDigitDoubleAndTripleValue} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                                 </svg>
@@ -177,16 +201,16 @@ export function Bill() {
                             <div className="border-t w-full"></div>
                             <div className="flex justify-around p-2 pt-4 gap-4">
                                 <div className="relative z-0">
-                                    <input ref={digitRef} onKeyUp={inputTempsKey} onChange={inputTemps} type={"text"} id="input_digits" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                                    <input tabIndex={1} ref={digitRef} onKeyUp={inputTempsKey} onChange={inputTemps} type={"text"} id="input_digits" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                     <label htmlFor="input_digits" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ใส่เลข</label>
                                 </div>
                                 <button onClick={digitRevers} style={{ minWidth: "60px" }} className="whitespace-nowrap items-center text-xs bg-orange-500 hover:bg-orange-400 text-white font-light p-2 rounded shadow">กลับเลข</button>
                                 <div className="relative z-0">
-                                    <input ref={priceTopRef} type={"number"} id="input_price_top" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                                    <input tabIndex={2} ref={priceTopRef} type={"number"} id="input_price_top" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                     <label htmlFor="input_price_top" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">บน</label>
                                 </div>
                                 <div className="relative z-0">
-                                    <input ref={priceBottomRef} type={"number"} id="input_price_bottom" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
+                                    <input onKeyDown={addBillTempKey} tabIndex={3} ref={priceBottomRef} type={"number"} id="input_price_bottom" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                     <label htmlFor="input_price_bottom" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ล่าง</label>
                                 </div>
                                 <button onClick={addBillTemp} style={{ minWidth: "60px" }} className="whitespace-nowrap items-center inline-flex text-xs bg-green-600 hover:bg-green-500 text-white font-light p-2 rounded shadow">
@@ -199,7 +223,6 @@ export function Bill() {
                                 <div id="show_digit_orders" className="flex flex-col w-full">
                                     {
                                         billTemp!.map((bill, index) => (
-
                                             <div key={"bill_" + index} className="flex flex-row w-full bg-gray-100 justify-center items-center my-2">
                                                 {
                                                     bill.digit[0] && bill.digit_type === "TWO" ?
@@ -239,7 +262,7 @@ export function Bill() {
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <span>รวม:</span>
-                                <span>4 บาท</span>
+                                <span>{price.reduce((price, current) => price + current, 0)} บาท</span>
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <button style={{ minWidth: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-500 text-white font-light p-2 rounded shadow">
