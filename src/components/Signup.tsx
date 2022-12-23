@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../context/AuthContextProvider";
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import TutorialHelperClass, { ITutorialDoc } from "../controllers/TutorialController";
+import TutorialHelperClass, { ITutorialDoc } from "../helpers/Tutorial";
 
 function Signup() {
     const user = useContext(AuthContext);
