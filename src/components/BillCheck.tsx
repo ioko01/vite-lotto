@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 
 export function BillCheck() {
+    const dispatch = useAppDispatch()
+    const bill = useAppSelector(state => state.bill)
+
+
     return (
         <div id="bill_check" className="flex flex-col">
             <div className="basis-full w-full p-2">

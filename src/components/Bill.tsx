@@ -1,9 +1,11 @@
 import { InputHTMLAttributes, KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { stateBill } from "../redux/features/bill/billSlice";
 
-type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
+export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
-interface Bill {
+export interface Bill {
     digit_type: TDigit
     digit: string[]
 }
@@ -18,6 +20,8 @@ export function Bill() {
     const priceTopRef = useRef<HTMLInputElement>(null)
     const priceBottomRef = useRef<HTMLInputElement>(null)
     const regex = /[\D\sa-zA-Zก-ฮ]/;
+
+    const dispatch = useAppDispatch()
 
     const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const value = e.currentTarget!.value as TDigit
@@ -120,7 +124,6 @@ export function Bill() {
         setBillTemp(billTemp.filter((_, index) => index !== parseInt(e.currentTarget.value)))
         setPrice(price.filter((_, index) => index !== parseInt(e.currentTarget.value)))
     }
-
 
     useEffect(() => {
         console.log(billTemp);
@@ -282,7 +285,7 @@ export function Bill() {
                                     </svg>
                                     &nbsp;Screenshot</button>
                                 <Link to="/bill/check">
-                                    <button style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
+                                    <button onClick={() => dispatch(stateBill(billTemp))} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
                                 </Link>
                             </div>
                         </div>
