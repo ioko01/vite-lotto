@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { stateBill } from "../redux/features/bill/billSlice";
+import { addBill } from "../redux/features/bill/billSlice";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -126,7 +126,7 @@ export function Bill() {
     }
 
     useEffect(() => {
-        console.log(billTemp);
+        
     }, [digitsTemp, billTemp, price])
 
     return (
@@ -285,7 +285,7 @@ export function Bill() {
                                     </svg>
                                     &nbsp;Screenshot</button>
                                 <Link to="/bill/check">
-                                    <button onClick={() => dispatch(stateBill(billTemp))} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
+                                    <button onClick={() => dispatch(addBill(billTemp))} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
                                 </Link>
                             </div>
                         </div>

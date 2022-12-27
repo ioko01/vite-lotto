@@ -8,13 +8,10 @@ export const billSlice = createSlice({
     name: 'bill',
     initialState,
     reducers: {
-        stateBill: (state, action: PayloadAction<Bill[]>) => {
-            const bill = action.payload
-            state = bill
-        }
+        addBill: (state, action: PayloadAction<Bill[]>) => state = action.payload
     },
 })
 
-export const { stateBill } = billSlice.actions
+export const { addBill } = billSlice.actions
 export const selectBill = (state: RootState) => state.bill
 export default billSlice.reducer
