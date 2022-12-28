@@ -1,7 +1,7 @@
 import { InputHTMLAttributes, KeyboardEventHandler, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { addBill } from "../redux/features/bill/billSlice";
+import { addBill, deleteBill } from "../redux/features/bill/billSlice";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -22,6 +22,7 @@ export function Bill() {
     const regex = /[\D\sa-zA-Zก-ฮ]/;
 
     const dispatch = useAppDispatch()
+    const bills = useAppSelector(state => state.bill)
 
     const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const value = e.currentTarget!.value as TDigit
@@ -126,7 +127,10 @@ export function Bill() {
     }
 
     useEffect(() => {
-        
+        if (bills.length > 0) {
+            setBillTemp(bills)
+            dispatch(deleteBill())
+        }
     }, [digitsTemp, billTemp, price])
 
     return (
@@ -224,7 +228,7 @@ export function Bill() {
                                 </div>
                                 <div className="relative z-0">
                                     <input onKeyDown={addBillTempKey} tabIndex={3} ref={priceBottomRef} type={"number"} id="input_price_bottom" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
-                                    <label htmlFor="input_price_bottom" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ล่าง</label>
+                                    <label htmlFor="input_price_bottom" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">{["ONE", "TWO", "NINETEEN", "WIN"].includes(digitsType) ? "ล่าง" : "โต๊ด"}</label>
                                 </div>
                                 <button onClick={addBillTemp} style={{ minWidth: "60px" }} className="whitespace-nowrap items-center inline-flex text-xs bg-green-600 hover:bg-green-500 text-white font-light p-2 rounded shadow">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
