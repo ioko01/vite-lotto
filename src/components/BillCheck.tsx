@@ -1,16 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill } from "../redux/features/bill/billSlice";
 import { TDigit } from "./Bill";
+import { TWO, THREE, ONE } from "../models/Type";
 
 interface Props {
     digit: string
-    type: string
+    digit_type: TDigit
     index: number
 }
 
-function TableBill({ digit, type, index }: Props) {
+function TableBill({ digit, digit_type, index }: Props) {
+
+    let type = ""
+    if (ONE.includes(digit_type) && index === 1) {
+        type = "วิ่งบน"
+    } else if (ONE.includes(digit_type) && index === 2) {
+        type = "วิ่งล่าง"
+    } else if (TWO.includes(digit_type) && index === 1) {
+        type = "2 ตัวบน"
+    } else if (TWO.includes(digit_type) && index === 2) {
+        type = "2 ตัวล่าง"
+    } else if (THREE.includes(digit_type) && index === 1) {
+        type = "3 ตัวบน"
+    } else if (THREE.includes(digit_type) && index === 2) {
+        type = "3 ตัวโต๊ด"
+    }
 
     return (
         <tr>
@@ -72,22 +88,27 @@ export function BillCheck() {
                                 </thead>
                                 <tbody>
                                     {bills.map((bill) => (
-                                        bill.digit_type === "TWO" ?
+                                        ONE.includes(bill.digit_type) ?
                                             bill.digit.map((digit, index) =>
-                                                <>
-                                                    {digit.split(":")[1] != "0" && <TableBill key={"two_t" + index} digit={digit} type={"2 ตัวบน"} index={1} />}
-                                                    {digit.split(":")[2] != "0" && <TableBill key={"two_b" + index} digit={digit} type={"2 ตัวล่าง"} index={2} />}
-                                                </>
+                                                <React.Fragment key={"one" + index}>
+                                                    {digit.split(":")[1] != "0" && <TableBill digit={digit} digit_type={bill.digit_type} index={1} />}
+                                                    {digit.split(":")[2] != "0" && <TableBill digit={digit} digit_type={bill.digit_type} index={2} />}
+                                                </React.Fragment>
                                             )
-                                            :
-                                            bill.digit_type === "THREE" ?
+                                            : TWO.includes(bill.digit_type) ?
                                                 bill.digit.map((digit, index) =>
-                                                    <>
-                                                        {digit.split(":")[1] != "0" && <TableBill key={"three_t" + index} digit={digit} type={"3 ตัวบน"} index={1} />}
-                                                        {digit.split(":")[2] != "0" && <TableBill key={"three_b" + index} digit={digit} type={"3 ตัวโต๊ด"} index={2} />}
-                                                    </>
+                                                    <React.Fragment key={"two" + index}>
+                                                        {digit.split(":")[1] != "0" && <TableBill digit={digit} digit_type={bill.digit_type} index={1} />}
+                                                        {digit.split(":")[2] != "0" && <TableBill digit={digit} digit_type={bill.digit_type} index={2} />}
+                                                    </React.Fragment>
                                                 )
-                                                : null
+                                                : THREE.includes(bill.digit_type) &&
+                                                bill.digit.map((digit, index) =>
+                                                    <React.Fragment key={"three" + index}>
+                                                        {digit.split(":")[1] != "0" && <TableBill key={"three_t" + index} digit={digit} digit_type={bill.digit_type} index={1} />}
+                                                        {digit.split(":")[2] != "0" && <TableBill key={"three_b" + index} digit={digit} digit_type={bill.digit_type} index={2} />}
+                                                    </React.Fragment>
+                                                )
                                     ))}
                                 </tbody>
                             </table>

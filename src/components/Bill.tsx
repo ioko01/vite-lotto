@@ -2,6 +2,7 @@ import { InputHTMLAttributes, KeyboardEventHandler, useEffect, useRef, useState 
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill, deleteBill } from "../redux/features/bill/billSlice";
+import { TWO, THREE, ONE } from "../models/Type";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -35,25 +36,38 @@ export function Bill() {
     }
 
     const addDigitDoubleAndTripleValue = () => {
-        if (digitsType === "TWO") {
+        if (TWO.includes(digitsType)) {
             setDigitsTemp([...digitsTemp, "00", "11", "22", "33", "44", "55", "66", "77", "88", "99"])
-        } else if (digitsType === "THREE") {
+        } else if (THREE.includes(digitsType)) {
             setDigitsTemp([...digitsTemp, "000", "111", "222", "333", "444", "555", "666", "777", "888", "999"])
         }
         document.getElementById("input_digits")!.focus()
     }
 
     const inputTemps = () => {
-        if (digitsType === "TWO") {
+        if (ONE.includes(digitsType)) {
             const digits = digitRef.current!.value.split(regex);
             digits.map((digit) => {
-                if (digit.length === 2) {
+                if (digit.length === 1) {
                     digitRef.current!.value = ""
-                    const digitFilter = digits.filter((digit) => digit != "" && digit.length === 2)
+                    const digitFilter = digits.filter((digit) => digit != "" && digit.length === 1)
                     setDigitsTemp([...digitsTemp].concat(digitFilter))
                 }
             })
-        } else if (digitsType === "THREE") {
+        } else if (TWO.includes(digitsType)) {
+            const digits = digitRef.current!.value.split(regex);
+            digits.map((digit) => {
+                if (digitsType === "TWO") {
+                    if (digit.length === 2) {
+                        digitRef.current!.value = ""
+                        const digitFilter = digits.filter((digit) => digit != "" && digit.length === 2)
+                        setDigitsTemp([...digitsTemp].concat(digitFilter))
+                    }
+                } else if (digitsType === "NINETEEN") {
+
+                }
+            })
+        } else if (THREE.includes(digitsType)) {
             const digits = digitRef.current!.value.split(regex);
             digits.map((digit) => {
                 if (digit.length == 3) {
@@ -74,14 +88,19 @@ export function Bill() {
     }
 
     const digitRevers = () => {
-        if (digitsType === "TWO") {
-            const digitRevers = digitsTemp.map((digitTemp) => {
-                const split = digitTemp.split("")
-                return split.reverse().join("")
-            })
-            const digitFilter = digitRevers.filter(digit => digit[0] != digit[1])
-            setDigitsTemp([...digitsTemp].concat(digitFilter))
-        } else if (digitsType === "THREE") {
+        if (TWO.includes(digitsType)) {
+            if (digitsType === "TWO") {
+                const digitRevers = digitsTemp.map((digitTemp) => {
+                    const split = digitTemp.split("")
+                    return split.reverse().join("")
+                })
+                const digitFilter = digitRevers.filter(digit => digit[0] != digit[1])
+                setDigitsTemp([...digitsTemp].concat(digitFilter))
+            } else if (digitsType === "NINETEEN") {
+
+            }
+
+        } else if (THREE.includes(digitsType)) {
 
         }
     }
@@ -197,21 +216,18 @@ export function Bill() {
 
                             <div className="flex justify-between w-full p-2">
                                 {
-                                    digitsType === "TWO" ?
+                                    TWO.includes(digitsType) ?
                                         <button onClick={addDigitDoubleAndTripleValue} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
                                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                                             </svg>
                                             &nbsp;เลขเบิ้ล</button>
-                                        :
-                                        digitsType === "THREE" ?
-                                            <button onClick={addDigitDoubleAndTripleValue} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
-                                                    <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-                                                </svg>
-                                                &nbsp;เลขตอง</button>
-                                            : null
-
+                                        : THREE.includes(digitsType) &&
+                                        <button onClick={addDigitDoubleAndTripleValue} style={{ width: "60px" }} className="whitespace-nowrap inline-flex text-xs bg-green-600 hover:bg-green-700 text-white font-light p-2 rounded shadow mx-2 mb-2">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-4 h-4">
+                                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                                            </svg>
+                                            &nbsp;เลขตอง</button>
                                 }
 
                             </div>
@@ -242,12 +258,12 @@ export function Bill() {
                                         billTemp!.map((bill, index) => (
                                             <div key={"bill_" + index} className="flex flex-row w-full bg-gray-100 justify-center items-center my-2">
                                                 {
-                                                    bill.digit[0] && bill.digit_type === "TWO" ?
-                                                        <div key={"price_" + index} className="p-2 px-4 mx-auto text-center">2 ตัว<br />บน x ล่าง<br />{bill.digit[0].split(":")[1]} x {bill.digit[0].split(":")[2]}</div>
-                                                        :
-                                                        bill.digit[0] && bill.digit_type === "THREE" ?
-                                                            <div key={"price_" + index} className="p-2 px-4 mx-auto text-center">3 ตัว<br />บน x โต๊ด<br />{bill.digit[0].split(":")[1]} x {bill.digit[0].split(":")[2]}</div> :
-                                                            null
+                                                    bill.digit[0] && ONE.includes(bill.digit_type) ?
+                                                        <div className="p-2 px-4 mx-auto text-center">วิ่ง<br />บน x ล่าง<br />{bill.digit[0].split(":")[1]} x {bill.digit[0].split(":")[2]}</div>
+                                                        : bill.digit[0] && TWO.includes(bill.digit_type) ?
+                                                            <div className="p-2 px-4 mx-auto text-center">2 ตัว<br />บน x ล่าง<br />{bill.digit[0].split(":")[1]} x {bill.digit[0].split(":")[2]}</div>
+                                                            : bill.digit[0] && THREE.includes(bill.digit_type) &&
+                                                            <div className="p-2 px-4 mx-auto text-center">3 ตัว<br />บน x โต๊ด<br />{bill.digit[0].split(":")[1]} x {bill.digit[0].split(":")[2]}</div>
                                                 }
                                                 <div key={"digit_" + index} className="w-3/5 h-full bg-white p-2">
                                                     {
