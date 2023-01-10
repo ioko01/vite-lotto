@@ -86,9 +86,13 @@ export function Bill() {
                     digitRef.current!.value = ""
                     const digitFilter = digits.filter((digit) => digit != "" && digit.length === 3)
                     setDigitsTemp([...digitsTemp].concat(digitFilter))
+                    if (digitsType === "SIX") {
+                        setTimeout(() => {
+                            document.getElementById("revert")!.click()
+                        }, 50)
+                    }
                 }
             })
-
         }
     }
 
@@ -116,7 +120,7 @@ export function Bill() {
                 const tmp: string[] = []
                 const split = digitTemp.split("")
                 split.map((_, index) => {
-                    let arrTemp = []
+                    const arrTemp: number[] = []
                     for (let i = 0; i < 3; i++) (i !== index) && arrTemp.push(i)
                     tmp.push(split[index].concat(split[arrTemp[0]], split[arrTemp[1]]))
                     tmp.push(split[index].concat(split[arrTemp[1]], split[arrTemp[0]]))
@@ -260,7 +264,7 @@ export function Bill() {
                                     <input tabIndex={1} ref={digitRef} onKeyUp={inputTempsKey} onChange={inputTemps} type={"text"} id="input_digits" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                     <label htmlFor="input_digits" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">ใส่เลข</label>
                                 </div>
-                                <button onClick={digitRevers} style={{ minWidth: "60px" }} className="whitespace-nowrap items-center text-xs bg-orange-500 hover:bg-orange-400 text-white font-light p-2 rounded shadow">กลับเลข</button>
+                                <button id="revert" onClick={digitRevers} style={{ minWidth: "60px" }} className="whitespace-nowrap items-center text-xs bg-orange-500 hover:bg-orange-400 text-white font-light p-2 rounded shadow">กลับเลข</button>
                                 <div className="relative z-0">
                                     <input tabIndex={2} ref={priceTopRef} type={"number"} id="input_price_top" className="block h-8 py-2 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer" placeholder=" " />
                                     <label htmlFor="input_price_top" className="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">บน</label>
