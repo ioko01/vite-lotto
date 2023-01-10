@@ -64,7 +64,19 @@ export function Bill() {
                         setDigitsTemp([...digitsTemp].concat(digitFilter))
                     }
                 } else if (digitsType === "NINETEEN") {
+                    if (digit.length === 1) {
+                        digitRef.current!.value = ""
+                        const digitFilter = digits.filter((digit) => digit != "" && digit.length === 1)
 
+                        let digitNineteen = []
+                        let digitNineteenRevers = []
+                        for (let i = 0; i < 10; i++) {
+                            digitNineteen[i] = digitFilter.concat(String(i)).join("")
+                            digitNineteenRevers[i] = digitFilter.concat(String(i)).reverse().join("")
+                        }
+                        const digitNineteenReversResult = digitNineteenRevers.filter(digit => digit[0] != digit[1])
+                        setDigitsTemp([...digitsTemp].concat(digitNineteen.concat(digitNineteenReversResult)))
+                    }
                 }
             })
         } else if (THREE.includes(digitsType)) {
@@ -96,10 +108,7 @@ export function Bill() {
                 })
                 const digitFilter = digitRevers.filter(digit => digit[0] != digit[1])
                 setDigitsTemp([...digitsTemp].concat(digitFilter))
-            } else if (digitsType === "NINETEEN") {
-
             }
-
         } else if (THREE.includes(digitsType)) {
 
         }
@@ -268,7 +277,7 @@ export function Bill() {
                                                 <div key={"digit_" + index} className="w-3/5 h-full bg-white p-2">
                                                     {
                                                         bill.digit.map((digit, index) => (
-                                                            <span key={"number_" + index} className="px-1 inline-block font-light">{digit!.split(":")[0]!}&nbsp;</span>
+                                                            <span style={{ width: "20px" }} key={"number_" + index} className="inline-block font-light">{digit!.split(":")[0]!}&nbsp;</span>
                                                         ))
                                                     }
                                                 </div>
