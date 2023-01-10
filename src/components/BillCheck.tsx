@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill } from "../redux/features/bill/billSlice";
 import { TDigit } from "./Bill";
 import { TWO, THREE, ONE } from "../models/Type";
+import { addNote } from "../redux/features/bill/noteSlice";
 
 interface Props {
     digit: string
@@ -48,7 +49,12 @@ function TableBill({ digit, digit_type, index }: Props) {
 export function BillCheck() {
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
+    const note = useAppSelector(state => state.note)
 
+    const backPage = () => {
+        dispatch(addBill(bills))
+        dispatch(addNote(note))
+    }
     return (
         <div id="bill_check" className="flex flex-col">
             <div className="basis-full w-full p-2">
@@ -116,7 +122,7 @@ export function BillCheck() {
 
                         <div id="bill_footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
                             <div className="flex justify-center w-full p-2 gap-2">
-                                <span>หมายเหตุ: พี่อิน</span>
+                                <span>หมายเหตุ: {note.note}</span>
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <span>รวม:</span>
@@ -124,7 +130,7 @@ export function BillCheck() {
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <Link to="/bill">
-                                    <button onClick={() => dispatch(addBill(bills))} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-gray-400 hover:bg-gray-500 text-white font-light p-2 rounded shadow">ย้อนกลับ</button>
+                                    <button onClick={backPage} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-gray-400 hover:bg-gray-500 text-white font-light p-2 rounded shadow">ย้อนกลับ</button>
                                 </Link>
                                 <Link to="/bill/check">
                                     <button style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">ยืนยัน</button>

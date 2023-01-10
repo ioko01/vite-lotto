@@ -5,6 +5,7 @@ import { addBill, deleteBill } from "../redux/features/bill/billSlice";
 import { TWO, THREE, ONE } from "../models/Type";
 import { stateModal } from "../redux/features/modal/modalSlice";
 import { ModalConfirm } from "./ModalConfirm";
+import { INote, addNote } from "../redux/features/bill/noteSlice";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -20,14 +21,17 @@ export function Bill() {
     const [digitsTemp, setDigitsTemp] = useState<string[]>([])
     const [billTemp, setBillTemp] = useState<Bill[]>([])
     const [price, setPrice] = useState<number[]>([])
+    const [isNote, setIsNote] = useState<INote>({ note: "" })
     const digitRef = useRef<HTMLInputElement>(null)
     const priceTopRef = useRef<HTMLInputElement>(null)
     const priceBottomRef = useRef<HTMLInputElement>(null)
+    const noteRef = useRef<HTMLInputElement>(null)
     const regex = /[\D\sa-zA-Zก-ฮ]/;
 
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
     const modal = useAppSelector(state => state.modal)
+    const note = useAppSelector(state => state.note)
 
     const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const value = e.currentTarget!.value as TDigit
@@ -157,6 +161,7 @@ export function Bill() {
                 setPrice([...price, priceSum])
 
                 setBillTemp([...billTemp, { digit_type: digitsType, digit: bill }])
+                dispatch(addNote({ note: noteRef.current?.value }))
                 priceTopRef.current!.value = ""
                 priceBottomRef.current!.value = ""
                 setDigitsTemp([])
@@ -177,16 +182,23 @@ export function Bill() {
         setPrice(price.filter((_, index) => index !== parseInt(e.currentTarget.value)))
     }
 
+    const saveBill = () => {
+        dispatch(addBill(billTemp))
+        dispatch(addNote(isNote))
+    }
+
     useEffect(() => {
         if (bills.length > 0) {
             setBillTemp(bills)
             dispatch(deleteBill())
+            setIsNote(note)
         }
         if (modal.confirm) {
             setDigitsTemp([])
             dispatch(stateModal({ show: false, openModal: "CONFIRM", confirm: false }))
             setDigitsType(digitsTypeTemp)
         }
+        
     }, [digitsTemp, billTemp, price, modal])
 
     return (
@@ -327,8 +339,8 @@ export function Bill() {
 
                         <div id="bill_footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
                             <div className="flex justify-center w-full p-2 gap-2">
-                                <span>หมายเหตุ: </span>
-                                <input type="text" className="border-b w-full" />
+                                <label htmlFor="input_note">หมายเหตุ: </label>
+                                <input type="text" className="border-b w-full" ref={noteRef} id="input_note" onChange={(e) => setIsNote({ note: e.currentTarget.value })} value={isNote.note} />
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <span>รวม:</span>
@@ -342,7 +354,7 @@ export function Bill() {
                                     </svg>
                                     &nbsp;Screenshot</button>
                                 <Link to="/bill/check">
-                                    <button onClick={() => dispatch(addBill(billTemp))} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
+                                    <button onClick={saveBill} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
                                 </Link>
                             </div>
                         </div>
