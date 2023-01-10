@@ -111,24 +111,20 @@ export function Bill() {
                 setDigitsTemp([...digitsTemp].concat(digitFilter))
             }
         } else if (THREE.includes(digitsType)) {
-            const digitRevers = digitsTemp.map((digitTemp) => {
+            const tmpFilter: string[] = []
+            digitsTemp.map((digitTemp) => {
+                const tmp: string[] = []
                 const split = digitTemp.split("")
-                let tmp: string[] = []
                 split.map((_, index) => {
                     let arrTemp = []
-                    for (let i = 0; i < 3; i++) {
-                        if (i !== index) {
-                            arrTemp.push(i)
-                        }
-                    }
+                    for (let i = 0; i < 3; i++) (i !== index) && arrTemp.push(i)
                     tmp.push(split[index].concat(split[arrTemp[0]], split[arrTemp[1]]))
                     tmp.push(split[index].concat(split[arrTemp[1]], split[arrTemp[0]]))
                 })
-                return tmp
+                const filter = Array.from(new Set(tmp))
+                filter.map((digit, index) => index > 0 && tmpFilter.push(digit))
             })
-            const digitFilter = new Set(digitRevers[0])
-            console.log(new Array(digitFilter))
-            // setDigitsTemp([...digitsTemp].concat(digitFilter))
+            setDigitsTemp([...digitsTemp].concat(tmpFilter))
         }
     }
 
