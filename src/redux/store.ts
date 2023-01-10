@@ -5,7 +5,7 @@ import billReducer from "./features/bill/billSlice";
 export const store = configureStore({
     reducer: {
         modal: modalReducer,
-        bill: billReducer
+        bill: billReducer,
     },
 })
 

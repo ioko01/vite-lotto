@@ -1,8 +1,10 @@
-import { InputHTMLAttributes, KeyboardEventHandler, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill, deleteBill } from "../redux/features/bill/billSlice";
 import { TWO, THREE, ONE } from "../models/Type";
+import { stateModal } from "../redux/features/modal/modalSlice";
+import { ModalConfirm } from "./ModalConfirm";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -14,6 +16,7 @@ export interface Bill {
 export function Bill() {
 
     const [digitsType, setDigitsType] = useState<TDigit>("TWO")
+    const [digitsTypeTemp, setDigitsTypeTemp] = useState<TDigit>("TWO")
     const [digitsTemp, setDigitsTemp] = useState<string[]>([])
     const [billTemp, setBillTemp] = useState<Bill[]>([])
     const [price, setPrice] = useState<number[]>([])
@@ -24,11 +27,13 @@ export function Bill() {
 
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
+    const modal = useAppSelector(state => state.modal)
 
     const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const value = e.currentTarget!.value as TDigit
+        setDigitsTypeTemp(value)
         if (digitsTemp.length > 0) {
-            alert(value)
+            dispatch(stateModal({ show: true, openModal: "CONFIRM" }))
         } else {
             setDigitsType(value)
             document.getElementById("input_digits")!.focus()
@@ -177,7 +182,12 @@ export function Bill() {
             setBillTemp(bills)
             dispatch(deleteBill())
         }
-    }, [digitsTemp, billTemp, price])
+        if (modal.confirm) {
+            setDigitsTemp([])
+            dispatch(stateModal({ show: false, openModal: "CONFIRM", confirm: false }))
+            setDigitsType(digitsTypeTemp)
+        }
+    }, [digitsTemp, billTemp, price, modal])
 
     return (
         <div id="bill" className="flex flex-col" onLoad={() => document.getElementById("input_digits")!.focus()}>
@@ -433,6 +443,7 @@ export function Bill() {
                     </table>
                 </div>
             </div>
+            {modal.openModal === "CONFIRM" && <ModalConfirm />}
         </div>
     )
 }

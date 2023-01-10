@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
 
-type Modal = "DETAIL" | "DELETE"
+type Modal = "DETAIL" | "DELETE" | "CONFIRM"
 
 interface ModalState {
   show: boolean,
-  openModal: Modal
+  openModal: Modal,
+  confirm?: boolean
 }
 
 const initialState: ModalState = {
   show: false,
-  openModal: "DELETE"
+  openModal: "DELETE",
+  confirm: false
 }
 
 export const modalSlice = createSlice({
@@ -21,6 +23,7 @@ export const modalSlice = createSlice({
       const modal = action.payload
       state.show = modal.show
       state.openModal = modal.openModal
+      state.confirm = modal.confirm
     }
   },
 })
