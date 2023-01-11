@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill } from "../redux/features/bill/billSlice";
 import { TDigit } from "./Bill";
@@ -50,11 +50,17 @@ export function BillCheck() {
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
     const note = useAppSelector(state => state.note)
-
+    const navigate = useNavigate();
     const backPage = () => {
         dispatch(addBill(bills))
         dispatch(addNote(note))
     }
+
+    useEffect(() => {
+        if (bills.length === 0) {
+            navigate('/', { replace: true });
+        }
+    }, [bills])
     return (
         <div id="bill_check" className="flex flex-col">
             <div className="basis-full w-full p-2">

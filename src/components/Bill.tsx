@@ -183,11 +183,14 @@ export function Bill() {
     }
 
     const saveBill = () => {
-        dispatch(addBill(billTemp))
-        dispatch(addNote(isNote))
+        if (billTemp.length > 0) {
+            dispatch(addBill(billTemp))
+            dispatch(addNote(isNote))
+        }
     }
 
     useEffect(() => {
+        console.log(billTemp);
         if (bills.length > 0) {
             setBillTemp(bills)
             dispatch(deleteBill())
@@ -198,7 +201,7 @@ export function Bill() {
             dispatch(stateModal({ show: false, openModal: "CONFIRM", confirm: false }))
             setDigitsType(digitsTypeTemp)
         }
-        
+
     }, [digitsTemp, billTemp, price, modal])
 
     return (
@@ -317,7 +320,7 @@ export function Bill() {
                                                 <div key={"digit_" + index} className="w-3/5 h-full bg-white p-2">
                                                     {
                                                         bill.digit.map((digit, index) => (
-                                                            <span style={{ width: "20px" }} key={"number_" + index} className="inline-block font-light">{digit!.split(":")[0]!}&nbsp;</span>
+                                                            <span style={{ width: "15px" }} key={"number_" + index} className="inline-block font-light mx-1">{digit!.split(":")[0]!}&nbsp;</span>
                                                         ))
                                                     }
                                                 </div>
@@ -353,8 +356,8 @@ export function Bill() {
                                         <path strokeLinecap="round" strokeLinejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
                                     </svg>
                                     &nbsp;Screenshot</button>
-                                <Link to="/bill/check">
-                                    <button onClick={saveBill} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">บันทึก</button>
+                                <Link to={billTemp.length > 0 ? "/bill/check" : "#"}>
+                                    <button onClick={saveBill} style={{ minWidth: "60px" }} className={"whitespace-nowrap text-xs text-white font-light p-2 rounded shadow " + (billTemp.length === 0 ? "bg-gray-200 cursor-default" : "bg-blue-600 hover:bg-blue-500")}>บันทึก</button>
                                 </Link>
                             </div>
                         </div>
