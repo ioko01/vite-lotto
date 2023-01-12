@@ -5,7 +5,7 @@ import { addBill, deleteBill } from "../redux/features/bill/billSlice";
 import { TWO, THREE, ONE } from "../models/Type";
 import { stateModal } from "../redux/features/modal/modalSlice";
 import { ModalConfirm } from "./ModalConfirm";
-import { INote, addNote } from "../redux/features/bill/noteSlice";
+import { INote, addNotePrice } from "../redux/features/bill/notePriceSlice";
 
 export type TDigit = "ONE" | "TWO" | "THREE" | "SIX" | "NINETEEN" | "WIN"
 
@@ -21,7 +21,7 @@ export function Bill() {
     const [digitsTemp, setDigitsTemp] = useState<string[]>([])
     const [billTemp, setBillTemp] = useState<Bill[]>([])
     const [price, setPrice] = useState<number[]>([])
-    const [isNote, setIsNote] = useState<INote>({ note: "" })
+    const [isNotePrice, setIsNotePrice] = useState<INote>({ note: "", price: [] })
     const digitRef = useRef<HTMLInputElement>(null)
     const priceTopRef = useRef<HTMLInputElement>(null)
     const priceBottomRef = useRef<HTMLInputElement>(null)
@@ -31,7 +31,7 @@ export function Bill() {
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
     const modal = useAppSelector(state => state.modal)
-    const note = useAppSelector(state => state.note)
+    const notePrice = useAppSelector(state => state.notePrice)
 
     const setDigitValue = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         const value = e.currentTarget!.value as TDigit
@@ -161,7 +161,6 @@ export function Bill() {
                 setPrice([...price, priceSum])
 
                 setBillTemp([...billTemp, { digit_type: digitsType, digit: bill }])
-                dispatch(addNote({ note: noteRef.current?.value }))
                 priceTopRef.current!.value = ""
                 priceBottomRef.current!.value = ""
                 setDigitsTemp([])
@@ -170,6 +169,7 @@ export function Bill() {
 
         setTimeout(() => {
             document.getElementById("input_digits")!.focus()
+
         }, 100)
     }
 
@@ -185,24 +185,29 @@ export function Bill() {
     const saveBill = () => {
         if (billTemp.length > 0) {
             dispatch(addBill(billTemp))
-            dispatch(addNote(isNote))
+            dispatch(addNotePrice(isNotePrice))
         }
     }
 
     useEffect(() => {
-        console.log(billTemp);
         if (bills.length > 0) {
             setBillTemp(bills)
             dispatch(deleteBill())
-            setIsNote(note)
+            setIsNotePrice(notePrice)
+            setPrice(notePrice.price)
         }
+
+        if (price.length > 0) {
+            setIsNotePrice({ note: noteRef.current?.value, price: price })
+        }
+
         if (modal.confirm) {
             setDigitsTemp([])
             dispatch(stateModal({ show: false, openModal: "CONFIRM", confirm: false }))
             setDigitsType(digitsTypeTemp)
         }
 
-    }, [digitsTemp, billTemp, price, modal])
+    }, [digitsTemp, billTemp, modal, price])
 
     return (
         <div id="bill" className="flex flex-col" onLoad={() => document.getElementById("input_digits")!.focus()}>
@@ -244,7 +249,7 @@ export function Bill() {
                                     <button value={"SIX" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "SIX" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>6 กลับ</button>
                                     <button value={"NINETEEN" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "NINETEEN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>19 ประตู</button>
                                     <button value={"ONE" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "ONE" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>เลขวิ่ง</button>
-                                    <button value={"WIN" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "WIN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>วินเลข</button>
+                                    {/* <button value={"WIN" as TDigit} onClick={setDigitValue} style={{ width: "60px" }} className={"text-xs bg-white text-gray-800 font-semibold p-2 border rounded shadow mx-2 mb-2 " + (digitsType === "WIN" ? "bg-green-400 border-green-500" : "bg-gray-100 border-gray-400 hover:bg-gray-200")}>วินเลข</button> */}
                                 </div>
                                 <div>
                                     <img width={60} src="../../public/jones.jpg" alt="jones" />
@@ -343,7 +348,7 @@ export function Bill() {
                         <div id="bill_footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <label htmlFor="input_note">หมายเหตุ: </label>
-                                <input type="text" className="border-b w-full" ref={noteRef} id="input_note" onChange={(e) => setIsNote({ note: e.currentTarget.value })} value={isNote.note} />
+                                <input type="text" className="border-b w-full" ref={noteRef} id="input_note" onChange={(e) => setIsNotePrice({ note: e.currentTarget.value, price: isNotePrice.price })} value={isNotePrice.note} />
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <span>รวม:</span>

@@ -4,7 +4,8 @@ import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { addBill } from "../redux/features/bill/billSlice";
 import { TDigit } from "./Bill";
 import { TWO, THREE, ONE } from "../models/Type";
-import { addNote } from "../redux/features/bill/noteSlice";
+import { addNotePrice } from "../redux/features/bill/notePriceSlice";
+import BillHelperClass, { IBillDoc } from "../helpers/Bill";
 
 interface Props {
     digit: string
@@ -49,18 +50,134 @@ function TableBill({ digit, digit_type, index }: Props) {
 export function BillCheck() {
     const dispatch = useAppDispatch()
     const bills = useAppSelector(state => state.bill)
-    const note = useAppSelector(state => state.note)
+    const notePrice = useAppSelector(state => state.notePrice)
     const navigate = useNavigate();
+    const [isBills, setIsBills] = useState<IBillDoc[]>([])
+    const [isLoading, setIsLoading] = useState(false);
+    const [digitOne, setDigitOne] = useState<string[]>([])
+    const [digitTwo, setDigitTwo] = useState<string[]>([])
+    const [digitThree, setDigiThree] = useState<string[]>([])
+
+
     const backPage = () => {
         dispatch(addBill(bills))
-        dispatch(addNote(note))
+        dispatch(addNotePrice(notePrice))
+    }
+
+    const fetchBills = async () => {
+        const getBills = await BillHelperClass.getBill()
+        setIsBills(getBills)
+    }
+
+    useEffect(() => {
+        bills.map(digit => {
+            ONE.includes(digit.digit_type) && setDigitOne(digit.digit)
+            TWO.includes(digit.digit_type) && setDigitTwo(digit.digit)
+            THREE.includes(digit.digit_type) && setDigiThree(digit.digit)
+        })
+
+        fetchBills()
+    }, [])
+
+    // console.log(isBills)
+
+    const addBillToDatabase = async () => {
+        try {
+
+            setIsLoading(true)
+            await BillHelperClass.addBill({
+                store: {
+                    name: "ร้านมั่งมี",
+                    img_logo: "logo.jpg",
+                    user_create_id: "1",
+                    created_at: new Date(),
+                    updated_at: new Date()
+                },
+                lotto: {
+                    name: "ดาวน์โจนส์ VIP",
+                    img_flag: "jones.jpg",
+                    open: new Date(),
+                    close: new Date(),
+                    report: new Date(),
+                    status: "OPEN",
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    user_create_id: "1"
+                },
+                rate: {
+                    store: {
+                        name: "ร้านมั่งมี",
+                        img_logo: "logo.jpg",
+                        user_create_id: "1",
+                        created_at: new Date(),
+                        updated_at: new Date()
+                    },
+                    lotto: {
+                        name: "ดาวน์โจนส์ VIP",
+                        img_flag: "jones.jpg",
+                        open: new Date(),
+                        close: new Date(),
+                        report: new Date(),
+                        status: "OPEN",
+                        created_at: new Date(),
+                        updated_at: new Date(),
+                        user_create_id: "1"
+                    },
+                    one_digits: {
+                        top: "3",
+                        bottom: "4"
+                    },
+                    two_digits: {
+                        top: "95",
+                        bottom: "95"
+                    },
+                    three_digits: {
+                        top: "800",
+                        toad: "125"
+                    },
+                    bet_one_digits: {
+                        top: "1:10000:100000",
+                        bottom: "1:10000:100000"
+                    },
+                    bet_two_digits: {
+                        top: "1:10000:100000",
+                        bottom: "1:10000:100000"
+                    },
+                    bet_three_digits: {
+                        top: "1:10000:100000",
+                        bottom: "1:10000:100000"
+                    },
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    user_create_id: "1"
+                },
+                one_digits: digitOne,
+                two_digits: digitTwo,
+                three_digits: digitThree,
+                times: "12-01-2566",
+                note: "asd",
+                status: "WAIT",
+                created_at: new Date(),
+                updated_at: new Date(),
+                user_create_id: "1"
+
+            })
+        } catch (error) {
+            console.log(error);
+            alert(error)
+        } finally {
+            setIsLoading(false)
+            fetchBills()
+        }
     }
 
     useEffect(() => {
         if (bills.length === 0) {
             navigate('/', { replace: true });
         }
-    }, [bills])
+        // console.log(bills);
+
+    }, [bills, notePrice])
     return (
         <div id="bill_check" className="flex flex-col">
             <div className="basis-full w-full p-2">
@@ -128,18 +245,18 @@ export function BillCheck() {
 
                         <div id="bill_footer" className="flex flex-col items-center rounded-lg w-full mb-3 p-2">
                             <div className="flex justify-center w-full p-2 gap-2">
-                                <span>หมายเหตุ: {note.note}</span>
+                                <span>หมายเหตุ: {notePrice.note}</span>
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <span>รวม:</span>
-                                <span>4 บาท</span>
+                                <span>{notePrice.price.reduce((price, current) => price + current, 0)} บาท</span>
                             </div>
                             <div className="flex justify-center w-full p-2 gap-2">
                                 <Link to="/bill">
                                     <button onClick={backPage} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-gray-400 hover:bg-gray-500 text-white font-light p-2 rounded shadow">ย้อนกลับ</button>
                                 </Link>
                                 <Link to="/bill/check">
-                                    <button style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">ยืนยัน</button>
+                                    <button onClick={addBillToDatabase} style={{ minWidth: "60px" }} className="whitespace-nowrap text-xs bg-blue-600 hover:bg-blue-500 text-white font-light p-2 rounded shadow">ยืนยัน</button>
                                 </Link>
                             </div>
                         </div>

@@ -1,13 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit'
 import modalReducer from './features/modal/modalSlice'
 import billReducer from "./features/bill/billSlice";
-import noteReducer from "./features/bill/noteSlice";
+import notePriceReducer from "./features/bill/notePriceSlice";
 
 export const store = configureStore({
     reducer: {
         modal: modalReducer,
         bill: billReducer,
-        note: noteReducer,
+        notePrice: notePriceReducer,
     },
 })
 
